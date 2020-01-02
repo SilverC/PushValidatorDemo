@@ -1,0 +1,30 @@
+﻿@model LoginWithPushValidatorViewModel
+@{
+    ViewData["Title"] = "PushValidator Two-factor authentication";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<p>Your login is protected with PushValidator MFA. Accept the push notification on your mobile device.</p>
+<div class="row">
+    <div class="col-md-4">
+        <p>@Model.Request.ToString()</p>
+        <input id="request" type="hidden" value="@Model.Request.ToString()"/>
+        <p>@Model.LoginEndpoint</p>
+        <input id="endpoint" type="hidden" value="@Model.LoginEndpoint"/>
+        <p>@Model.AuthenticationResultEndpoint</p>
+        <input id="resultEndpoint" type="hidden" value="@Model.AuthenticationResultEndpoint"/>
+        <p id="result"></p>
+    </div>
+    <div id="loading-spinner" class="spinner-border text-warning" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<p>
+    Don't have access to your authenticator device? You can 
+    <a asp-action="LoginWithRecoveryCode" asp-route-returnUrl="@ViewData["ReturnUrl"]">log in with a recovery code</a>.
+</p>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
