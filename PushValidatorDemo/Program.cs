@@ -17,19 +17,26 @@ namespace PushValidatorDemo
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                   .ConfigureAppConfiguration(configuration =>
-                   {
-                       configuration.AddJsonFile("secrets.json", optional: true);
-                   })
-                   .UseKestrel(options =>
-                   {
-                       options.ListenLocalhost(5002, listenOptions =>
-                       {
-                           listenOptions.UseHttps();
-                       });
-                   })
-                   .UseStartup<Startup>();
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var webHost = WebHost.CreateDefaultBuilder(args)
+                                 .ConfigureAppConfiguration(configuration =>
+                                 {
+                                     configuration.AddJsonFile("secrets.json", optional: true);
+                                 });
+            if (environment == EnvironmentName.Development)
+            {
+                webHost.UseKestrel(options =>
+                {
+                    options.ListenLocalhost(5002, listenOptions =>
+                    {
+                        listenOptions.UseHttps();
+                    });
+                });
+            }
+                                 
+            return webHost.UseStartup<Startup>();
+        }   
     }
 }
