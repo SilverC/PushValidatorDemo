@@ -99,7 +99,6 @@ namespace PushValidatorDemo.Controllers
 
             var clientIp = HttpContext.Connection.RemoteIpAddress.ToString();
             var userName = user.UserName;
-            //TODO: obtain applicationId and secret key from settings
             var request = PushValidator.SDK.Web.GenerateRequest(_pushValidatorSettings.Value.SecretKey,
                                                                 _pushValidatorSettings.Value.ApplicationId,
                                                                 clientIp,
@@ -107,8 +106,8 @@ namespace PushValidatorDemo.Controllers
             var model = new LoginWithPushValidatorViewModel
             {
                 Request = request,
-                LoginEndpoint = "https://localhost:5001/Transaction/LoginAttempt",
-                AuthenticationResultEndpoint = "https://localhost:5001/Transaction/CheckAuthentication"
+                LoginEndpoint = _pushValidatorSettings.Value.LoginEndpoint,
+                AuthenticationResultEndpoint = _pushValidatorSettings.Value.AuthenticationResultEndpoint
             };
 
             return View(model);
@@ -123,9 +122,7 @@ namespace PushValidatorDemo.Controllers
             {
                 throw new ApplicationException($"Unable to load two-factor authentication user.");
             }
-
             
-            //TODO: obtain secret key from settings
             var result = PushValidator.SDK.Web.ValidateResponse(_pushValidatorSettings.Value.SecretKey,
                                                                 model);
             if(!result)
@@ -140,10 +137,8 @@ namespace PushValidatorDemo.Controllers
             }
 
             // TODO: Perform check for server URI and server certficate fingerprint comparison
-
             // Success so finish signing in user
             var signinResult = await _signInManager.TwoFactorSignInAsync("PUSHVALIDATOR", string.Empty, false, false);
-
             return Json(signinResult.Succeeded);
         }
 
@@ -182,7 +177,6 @@ namespace PushValidatorDemo.Controllers
             }
 
             var authenticatorCode = model.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
-
             var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, model.RememberMachine);
 
             if (result.Succeeded)

@@ -21,7 +21,7 @@ namespace PushValidatorDemo
             WebHost.CreateDefaultBuilder(args)
                    .ConfigureAppConfiguration(configuration =>
                    {
-                       configuration.AddJsonFile("secrets.json");
+                       configuration.AddJsonFile("secrets.json", false);
                    })
                    .UseKestrel(options =>
                    {
