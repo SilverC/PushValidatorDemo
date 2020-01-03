@@ -16,7 +16,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.11" />
-    <PackageReference Include="PushValidator.SDK" Version="0.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   
   <ItemGroup>
@@ -26,5 +26,13 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Authentication\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PushValidator.SDK">
+      <HintPath>PushValidatorSDKRelease\PushValidator.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="PushValidator.Library">
+      <HintPath>PushValidatorSDKRelease\PushValidator.Library.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

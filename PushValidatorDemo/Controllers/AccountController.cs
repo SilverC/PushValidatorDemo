@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PushValidator.Library;
+using PushValidator.SDK;
 using PushValidatorDemo.Models;
 using PushValidatorDemo.Models.AccountViewModels;
 
@@ -99,7 +100,7 @@ namespace PushValidatorDemo.Controllers
 
             var clientIp = HttpContext.Connection.RemoteIpAddress.ToString();
             var userName = user.UserName;
-            var request = PushValidator.SDK.Web.GenerateRequest(_pushValidatorSettings.Value.SecretKey,
+            var request = Web.GenerateRequest(_pushValidatorSettings.Value.SecretKey,
                                                                 _pushValidatorSettings.Value.ApplicationId,
                                                                 clientIp,
                                                                 userName);
