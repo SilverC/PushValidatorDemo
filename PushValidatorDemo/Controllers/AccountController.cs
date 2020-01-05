@@ -98,7 +98,11 @@ namespace PushValidatorDemo.Controllers
                 throw new ApplicationException($"Unable to load two-factor authentication user.");
             }
 
-            _logger.LogDebug(HttpContext.Request.Headers.ToString());
+            foreach(var header in HttpContext.Request.Headers.Keys)
+            {
+                _logger.LogDebug($"{header} : {HttpContext.Request.Headers[header]}");
+            }
+           
 
             var clientIp = HttpContext.Connection.RemoteIpAddress.ToString();
             var userName = user.UserName;
