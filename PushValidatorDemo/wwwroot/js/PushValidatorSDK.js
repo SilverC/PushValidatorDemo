@@ -58,6 +58,7 @@ function successCallback(data) {
         error: function()
         {
             console.log("Failed on postback with authentication result...");
+            window.location.href = document.location.protocol + "//" + document.location.host;
         }
     });
 }
