@@ -104,7 +104,7 @@ namespace PushValidatorDemo.Controllers
             }
            
 
-            var clientIp = HttpContext.Connection.RemoteIpAddress.ToString();
+            var clientIp = HttpContext.Request.Headers["X-Client-IP"];//X-Client-IP for Azure App Service Proxy
             var userName = user.UserName;
             var request = Web.GenerateRequest(_pushValidatorSettings.Value.SecretKey,
                                                                 _pushValidatorSettings.Value.ApplicationId,
