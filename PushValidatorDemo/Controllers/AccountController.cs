@@ -114,7 +114,10 @@ namespace PushValidatorDemo.Controllers
             {
                 Request = request,
                 LoginEndpoint = _pushValidatorSettings.Value.LoginEndpoint,
-                AuthenticationResultEndpoint = _pushValidatorSettings.Value.AuthenticationResultEndpoint
+                AuthenticationResultEndpoint = _pushValidatorSettings.Value.AuthenticationResultEndpoint,
+                ServerURIs = _pushValidatorSettings.Value.ServerURIs,
+                ServerFingerprints = _pushValidatorSettings.Value.ServerFingerprints,
+                ServerIPs = _pushValidatorSettings.Value.ServerIPs
             };
 
             return View(model);

@@ -15,6 +15,27 @@
         <p>@Model.AuthenticationResultEndpoint</p>
         <input id="resultEndpoint" type="hidden" value="@Model.AuthenticationResultEndpoint"/>
         <p id="result"></p>
+        <p>
+            Server IPs:
+            @foreach(var ip in Model.ServerIPs)
+            {
+                <div>@ip</div>
+            }
+        </p>
+        <p>
+            Server URIs:
+            @foreach(var uri in Model.ServerURIs)
+            {
+                <div>@uri</div>
+            }
+        </p>
+        <p>
+            Server Fingerprints:
+            @foreach(var fingerprint in Model.ServerFingerprints)
+            {
+                <div>@fingerprint</div>
+            }
+        </p>
     </div>
     <div id="loading-spinner" class="spinner-border text-warning" role="status">
       <span class="sr-only">Loading...</span>
