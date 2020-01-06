@@ -131,7 +131,10 @@ namespace PushValidatorDemo.Controllers
             }
             
             var result = PushValidator.SDK.Web.ValidateResponse(_pushValidatorSettings.Value.SecretKey,
-                                                                model);
+                                                                model,
+                                                                _pushValidatorSettings.Value.ServerIPs,
+                                                                _pushValidatorSettings.Value.ServerFingerprints,
+                                                                _pushValidatorSettings.Value.ServerURIs);
             if(!result)
             {
                 return BadRequest();
