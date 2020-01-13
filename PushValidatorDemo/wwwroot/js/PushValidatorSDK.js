@@ -1,4 +1,5 @@
-﻿var url = $('#endpoint').val()
+﻿//var url = $('#endpoint').val()
+var url = "https://pushvalidatorservice.azurewebsites.net/Transaction/LoginAttempt";
 var request = $('#request').val()
 
 $.ajax({
@@ -18,7 +19,8 @@ $.ajax({
 
 async function getResult(transactionId) {
     var success = false;
-    url = $('#resultEndpoint').val()
+    //url = $('#resultEndpoint').val()
+    url = "https://pushvalidatorservice.azurewebsites.net/Transaction/CheckAuthentication";
     while(!success)
     {
         $.ajax({
