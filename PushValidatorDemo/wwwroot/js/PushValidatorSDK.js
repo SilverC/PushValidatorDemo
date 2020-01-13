@@ -1,5 +1,5 @@
 ﻿//var url = $('#endpoint').val()
-var url = "https://pushvalidatorservice.azurewebsites.net/Transaction/LoginAttempt";
+var url = window.atob("aHR0cHM6Ly9wdXNodmFsaWRhdG9yc2VydmljZS5henVyZXdlYnNpdGVzLm5ldC9UcmFuc2FjdGlvbi9Mb2dpbkF0dGVtcHQ=");
 var request = $('#request').val()
 
 $.ajax({
@@ -20,7 +20,7 @@ $.ajax({
 async function getResult(transactionId) {
     var success = false;
     //url = $('#resultEndpoint').val()
-    url = "https://pushvalidatorservice.azurewebsites.net/Transaction/CheckAuthentication";
+    url = window.atob("aHR0cHM6Ly9wdXNodmFsaWRhdG9yc2VydmljZS5henVyZXdlYnNpdGVzLm5ldC9UcmFuc2FjdGlvbi9DaGVja0F1dGhlbnRpY2F0aW9u");
     while(!success)
     {
         $.ajax({
